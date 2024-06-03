@@ -1,6 +1,7 @@
 package faccioli.giorgio.piatto.GamePanel;
 
-import faccioli.giorgio.piatto.KeyHandle.KeyHandle;
+import faccioli.giorgio.piatto.Entities.Player.Player;
+import faccioli.giorgio.piatto.KeyHandler.KeyHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ public class GamePanel extends JPanel implements Runnable {
     /*
     real screen dimension 16 * 3 = 48x48
      */
-    final int tileSize = originalTileSize * scale;
+    public final int tileSize = originalTileSize * scale;
     final int maxScreenCol = 16;
     final int maxScreenRow = 12;
 
@@ -30,15 +31,16 @@ public class GamePanel extends JPanel implements Runnable {
      */
     Thread gameThread;
     int FPS = 60;
-
     /*
     KeyBoard Event Chatcher
      */
-    KeyHandle keyHandle = new KeyHandle();
+    KeyHandler keyHandler = new KeyHandler();
 
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 1;
+
+    /*
+    Entities
+     */
+    Player player = new Player(this, keyHandler);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -50,24 +52,8 @@ public class GamePanel extends JPanel implements Runnable {
          */
         this.setDoubleBuffered(true);
 
-        this.addKeyListener(keyHandle);
+        this.addKeyListener(keyHandler);
         this.setFocusable(true);
-    }
-
-
-    public void update() {
-        if (keyHandle.upPressed) {
-            playerY -= playerSpeed;
-        }
-        if (keyHandle.downPressed) {
-            playerY += playerSpeed;
-        }
-        if (keyHandle.rightPressed) {
-            playerX += playerSpeed;
-        }
-        if (keyHandle.leftPressed) {
-            playerX -= playerSpeed;
-        }
     }
 
     /*
@@ -91,10 +77,10 @@ public class GamePanel extends JPanel implements Runnable {
         while (gameThread != null) {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
-timer += (currentTime - lastTime);
+            timer += (currentTime - lastTime);
             lastTime = currentTime;
 
-            if(delta >= 1){
+            if (delta >= 1) {
                 // Update
                 update();
                 // Draw
@@ -104,7 +90,7 @@ timer += (currentTime - lastTime);
                 drawCount++;
             }
 
-            if(timer > 1000000000){
+            if (timer > 1000000000) {
                 System.out.println("FPS-" + drawCount);
                 drawCount = 0;
                 timer = 0;
@@ -112,12 +98,17 @@ timer += (currentTime - lastTime);
         }
     }
 
+    public void update() {
+        player.update();
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+        player.draw(g2);
+
 
         g2.dispose();
     }

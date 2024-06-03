@@ -1,9 +1,9 @@
-package faccioli.giorgio.piatto.KeyHandle;
+package faccioli.giorgio.piatto.KeyHandler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class KeyHandle implements KeyListener {
+public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, rightPressed, leftPressed;
 
