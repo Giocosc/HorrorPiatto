@@ -1,6 +1,6 @@
-package faccioli.giorgio.piatto;
+package piatto;
 
-import faccioli.giorgio.piatto.GamePanel.GamePanel;
+import piatto.gamePanel.GamePanel;
 
 import javax.swing.*;
 

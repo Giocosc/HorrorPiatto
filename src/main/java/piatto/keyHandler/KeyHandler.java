@@ -1,4 +1,4 @@
-package faccioli.giorgio.piatto.KeyHandler;
+package piatto.keyHandler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -6,6 +6,10 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, rightPressed, leftPressed;
+
+    public boolean anyPressedKey() {
+        return upPressed || downPressed || rightPressed || leftPressed;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {

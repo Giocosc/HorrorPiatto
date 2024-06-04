@@ -1,7 +1,7 @@
-package faccioli.giorgio.piatto.GamePanel;
+package piatto.gamePanel;
 
-import faccioli.giorgio.piatto.Entities.Player.Player;
-import faccioli.giorgio.piatto.KeyHandler.KeyHandler;
+import piatto.entities.player.Player;
+import piatto.keyHandler.KeyHandler;
 
 import javax.swing.*;
 import java.awt.*;

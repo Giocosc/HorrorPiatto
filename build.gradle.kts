@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "faccioli.giorgio.piatto"
+group = "piatto"
 version = "1.0-SNAPSHOT"
 
 repositories {
