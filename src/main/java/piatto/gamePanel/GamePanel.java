@@ -2,6 +2,7 @@ package piatto.gamePanel;
 
 import piatto.entities.player.Player;
 import piatto.keyHandler.KeyHandler;
+import piatto.tile.tileManager.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +18,20 @@ public class GamePanel extends JPanel implements Runnable {
     real screen dimension 16 * 3 = 48x48
      */
     public final int tileSize = originalTileSize * scale;
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 12;
+
+    // WORLD SETTINGS
+    public final int maxWorldCol =  50;
+    public final int maxWorldRow =  50;
+    public final int maxWorldWidth =  maxWorldCol * tileSize;
+    public final int maxWorldHeight =  maxWorldRow * tileSize;
 
     /*
     screen size  768x576
      */
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    public final int screenWidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenRow;
 
     /*
     FPS Game thread master
@@ -36,16 +43,20 @@ public class GamePanel extends JPanel implements Runnable {
      */
     KeyHandler keyHandler = new KeyHandler();
 
-
     /*
     Entities
      */
-    Player player = new Player(this, keyHandler);
+    public Player player = new Player(this, keyHandler);
+
+    /*
+    Tile Manager
+     */
+    TileManager tileManager = new TileManager(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.decode("#2a1e34"));
         /* (improve rendering)
         true -> all drowing from this component will
         be done in an offscreen painting buffer
@@ -106,6 +117,8 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+        tileManager.draw(g2);
 
         player.draw(g2);
 

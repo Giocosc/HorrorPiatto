@@ -3,8 +3,8 @@ package piatto.entities.entityBase;
 import java.awt.image.BufferedImage;
 
 public class EntityBase {
-    public int x;
-    public int y;
+    public int worldX;
+    public int worldY;
 
     public int speed;
 
