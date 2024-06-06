@@ -1,6 +1,6 @@
 package piatto;
 
-import piatto.gamePanel.GamePanel;
+import piatto.core.gamePanel.GamePanel;
 
 import javax.swing.*;
 

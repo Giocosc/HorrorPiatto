@@ -1,6 +1,6 @@
 package piatto.tile.tileManager;
 
-import piatto.gamePanel.GamePanel;
+import piatto.core.gamePanel.GamePanel;
 import piatto.tile.tiltBase.Tile;
 
 import javax.imageio.ImageIO;
@@ -11,9 +11,9 @@ import java.io.InputStreamReader;
 
 public class TileManager {
     GamePanel gp;
-    Tile[] tile;
+    public Tile[] tile;
 
-    int mapTile[][];
+    public int mapTile[][];
 
 
     public TileManager(GamePanel gp) {
@@ -36,18 +36,29 @@ public class TileManager {
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/plate_simple_large.png"));
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/plate_brick.png"));
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_left.png"));
+            tile[2].collision = true;
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_left_plate.png"));
+            tile[3].collision = true;
             tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_right.png"));
+            tile[4].collision = true;
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_bottom_left_corner.png"));
+            tile[5].collision = true;
             tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_bottom.png"));
+            tile[6].collision = true;
             tile[7].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_bottom_right_corner.png"));
+            tile[7].collision = true;
             tile[8].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_top_right_corner.png"));
+            tile[8].collision = true;
             tile[9].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_top_left_corner.png"));
+            tile[9].collision = true;
             tile[10].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_top.png"));
+            tile[10].collision = true;
             tile[11].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall_top_topper.png"));
+            tile[11].collision = true;
 
             tile[tile.length - 2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/plate_simple.png"));
             tile[tile.length - 1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/void.png"));
+            tile[tile.length - 1].collision = true;
         } catch (
                 Exception e) {
             e.printStackTrace();
@@ -102,9 +113,9 @@ public class TileManager {
              */
             if (
                     worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-                    worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-                    worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-                    worldY - gp.tileSize < gp.player.worldY + gp.player.screenY
+                            worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                            worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
+                            worldY - gp.tileSize < gp.player.worldY + gp.player.screenY
             ) {
                 g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             }

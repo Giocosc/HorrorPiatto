@@ -1,4 +1,4 @@
-package piatto.keyHandler;
+package piatto.core.keyHandler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

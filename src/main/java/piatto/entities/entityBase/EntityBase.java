@@ -1,5 +1,6 @@
 package piatto.entities.entityBase;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class EntityBase {
@@ -13,4 +14,7 @@ public class EntityBase {
 
     public int spriteCounter = 1;
     public int spriteNumber = 1;
+
+    public Rectangle collisionArea;
+    public boolean collisionOn = false;
 }

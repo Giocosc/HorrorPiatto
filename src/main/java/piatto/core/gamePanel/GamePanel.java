@@ -1,7 +1,8 @@
-package piatto.gamePanel;
+package piatto.core.gamePanel;
 
+import piatto.core.collisionManager.CollisionManager;
 import piatto.entities.player.Player;
-import piatto.keyHandler.KeyHandler;
+import piatto.core.keyHandler.KeyHandler;
 import piatto.tile.tileManager.TileManager;
 
 import javax.swing.*;
@@ -51,7 +52,12 @@ public class GamePanel extends JPanel implements Runnable {
     /*
     Tile Manager
      */
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
+
+    /*
+    Collision Manager
+     */
+    public CollisionManager collisionManager = new CollisionManager(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));

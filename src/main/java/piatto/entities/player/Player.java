@@ -1,8 +1,8 @@
 package piatto.entities.player;
 
 import piatto.entities.entityBase.EntityBase;
-import piatto.gamePanel.GamePanel;
-import piatto.keyHandler.KeyHandler;
+import piatto.core.gamePanel.GamePanel;
+import piatto.core.keyHandler.KeyHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,8 +20,14 @@ public class Player extends EntityBase {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
-        screenX = (gamePanel.screenWidth / 2 ) - (gamePanel.tileSize/ 2);
-        screenY = (gamePanel.screenHeight / 2)- (gamePanel.tileSize/ 2) ;
+        screenX = (gamePanel.screenWidth / 2) - (gamePanel.tileSize / 2);
+        screenY = (gamePanel.screenHeight / 2) - (gamePanel.tileSize / 2);
+
+        collisionArea = new Rectangle();
+        collisionArea.x = 8;
+        collisionArea.y = 16;
+        collisionArea.width = 32;
+        collisionArea.height = 32;
 
         setDefaultValues();
         getPlayerImage();
@@ -107,19 +113,28 @@ public class Player extends EntityBase {
 
             if (keyHandler.upPressed) {
                 direction = "up";
-                worldY -= speed;
             }
             if (keyHandler.downPressed) {
                 direction = "down";
-                worldY += speed;
             }
             if (keyHandler.rightPressed) {
                 direction = "right";
-                worldX += speed;
             }
             if (keyHandler.leftPressed) {
                 direction = "left";
-                worldX -= speed;
+            }
+
+            // Check tile collision
+            collisionOn = false;
+            gamePanel.collisionManager.checkTile(this);
+
+            if (collisionOn == false) {
+                switch (direction) {
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
+                }
             }
 
             spriteCounter++;
