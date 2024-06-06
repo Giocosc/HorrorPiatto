@@ -1,8 +1,10 @@
 package piatto.core.gamePanel;
 
+import piatto.core.assetManager.AssetManager;
 import piatto.core.collisionManager.CollisionManager;
 import piatto.entities.player.Player;
 import piatto.core.keyHandler.KeyHandler;
+import piatto.object.SuperObject;
 import piatto.tile.tileManager.TileManager;
 
 import javax.swing.*;
@@ -59,6 +61,12 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public CollisionManager collisionManager = new CollisionManager(this);
 
+    /*
+    Objects
+     */
+    public AssetManager assetManager = new AssetManager(this);
+    public SuperObject obj[] = new SuperObject[10];
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
@@ -71,6 +79,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+    }
+    public void setupGame(){
+        assetManager.setObject();
     }
 
     /*
@@ -124,8 +135,17 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        // TILE
         tileManager.draw(g2);
 
+        // OBJECT
+        for (int index = 0; index < obj.length; index++){
+            if(obj[index] != null){
+                obj[index].draw(g2,this);
+            }
+        }
+
+        // Player
         player.draw(g2);
 
 

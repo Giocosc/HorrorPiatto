@@ -1,8 +1,9 @@
 package piatto.entities.player;
 
-import piatto.entities.entityBase.EntityBase;
+import piatto.entities.EntityBase;
 import piatto.core.gamePanel.GamePanel;
 import piatto.core.keyHandler.KeyHandler;
+import piatto.object.objets.Chest;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,6 +17,8 @@ public class Player extends EntityBase {
     public final int screenX;
     public final int screenY;
 
+    int hasIngot = 0;
+
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
@@ -26,8 +29,10 @@ public class Player extends EntityBase {
         collisionArea = new Rectangle();
         collisionArea.x = 8;
         collisionArea.y = 16;
-        collisionArea.width = 32;
-        collisionArea.height = 32;
+        collisionArea.width = 24;
+        collisionArea.height = 24;
+        solidAreaDefaultX = collisionArea.x;
+        solidAreaDefaultY = collisionArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -37,8 +42,8 @@ public class Player extends EntityBase {
     Set Playes default value
      */
     public void setDefaultValues() {
-        worldX = gamePanel.tileSize * 12;
-        worldY = gamePanel.tileSize * 9;
+        worldX = gamePanel.tileSize * 21;
+        worldY = gamePanel.tileSize * 25;
         speed = 4;
         direction = "down";
     }
@@ -128,12 +133,26 @@ public class Player extends EntityBase {
             collisionOn = false;
             gamePanel.collisionManager.checkTile(this);
 
+            // Check Obj collision
+            int objIndex = gamePanel.collisionManager.checkObject(this, true);
+            if (objIndex > -1) {
+                pickUpObject(objIndex);
+            }
+
             if (collisionOn == false) {
                 switch (direction) {
-                    case "up": worldY -= speed; break;
-                    case "down": worldY += speed; break;
-                    case "left": worldX -= speed; break;
-                    case "right": worldX += speed; break;
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
                 }
             }
 
@@ -148,6 +167,20 @@ public class Player extends EntityBase {
                 }
                 spriteCounter = 0;
             }
+        }
+
+    }
+
+    public void pickUpObject(int objIncex) {
+        String objectName =   gamePanel.obj[objIncex].name;
+        switch (objectName) {
+            case "Chest":
+                ((Chest)(gamePanel.obj[objIncex])).toggleChest();
+                break;
+            case "Ingot":
+                gamePanel.obj[objIncex] =  null;
+                hasIngot += 1;
+                break;
         }
 
     }
