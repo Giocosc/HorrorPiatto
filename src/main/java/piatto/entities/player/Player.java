@@ -17,7 +17,7 @@ public class Player extends EntityBase {
     public final int screenX;
     public final int screenY;
 
-    int hasIngot = 0;
+    public int totalIngots = 0;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -181,7 +181,14 @@ public class Player extends EntityBase {
             case "Ingot":
                 gamePanel.playSoundEffect(1);
                 gamePanel.obj[objIndex] = null;
-                hasIngot += 1;
+                totalIngots += 1;
+
+                if (totalIngots == gamePanel.ingotToCatch) {
+                    gamePanel.stopMusic();
+                    gamePanel.uiManager.gameFinished = true;
+                    gamePanel.playSoundEffect(3);
+                }
+
                 break;
         }
 

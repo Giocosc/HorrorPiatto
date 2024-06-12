@@ -1,14 +1,13 @@
 package piatto.tile.tileManager;
 
 import piatto.core.gamePanel.GamePanel;
-import piatto.tile.tiltBase.Tile;
+import piatto.tile.tileBase.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Random;
 
 import static java.util.Collections.min;
 import static piatto.common.Random.random_int;
@@ -27,30 +26,41 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tile = new Tile[50];
+        tile = new Tile[100];
 
         mapTile = new int[gp.maxWorldRow][gp.maxWorldCol];
         getTileImage();
         //loadMap("/map/map_layout.txt");
         //loadMap("/map/map_larger_layout.txt");
         loadMap("/map/map_with_grass_larger_layout.txt");
-        addRandomTree();
+        addRandomDecoration();
     }
 
-    private void addRandomTree() {
+    private void addRandomDecoration() {
 
-        for (int index = 0; index < 100; index++) {
+        // Add brush
+        for (int index = 0; index < 150; index++) {
             int x = random_int(2, 49);
             int y = random_int(2, 49);
             if (mapTile[y][x] == 41) {
                 mapTile[y][x] = 40;
             }
         }
-        for (int index = 0; index < 100; index++) {
+
+        // Add flower
+        for (int index = 0; index < 200; index++) {
             int x = random_int(2, 49);
             int y = random_int(2, 49);
             if (mapTile[y][x] == 41 || mapTile[y][x] == 40) {
-                mapTile[y][x] = 40;
+                mapTile[y][x] = 47;
+            }
+        }
+        // Rock
+        for (int index = 0; index < 50; index++) {
+            int x = random_int(2, 49);
+            int y = random_int(2, 49);
+            if (mapTile[y][x] == 41 || mapTile[y][x] == 40) {
+                mapTile[y][x] = 48;
             }
         }
     }
@@ -95,6 +105,9 @@ public class TileManager {
             tile[45].collision = true;
             tile[46].image = ImageIO.read(getClass().getResourceAsStream("/tiles/fence.png"));
             tile[46].collision = true;
+            tile[47].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass-flowers.png"));
+            tile[48].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass-rock.png"));
+            tile[48].collision = true;
 
             tile[tile.length - 1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/void.png"));
         } catch (

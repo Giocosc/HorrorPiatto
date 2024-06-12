@@ -3,6 +3,7 @@ package piatto.core.gamePanel;
 import piatto.core.assetManager.AssetManager;
 import piatto.core.collisionManager.CollisionManager;
 import piatto.core.soundManager.SoundManager;
+import piatto.core.UIManager.UIManager;
 import piatto.entities.player.Player;
 import piatto.core.keyHandler.KeyHandler;
 import piatto.object.SuperObject;
@@ -39,6 +40,9 @@ public class GamePanel extends JPanel implements Runnable {
     FPS Game thread master
      */
     Thread gameThread;
+    public void stopThread(){
+        gameThread = null;
+    }
     int FPS = 60;
     /*
     KeyBoard Event Chatcher
@@ -65,6 +69,13 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public AssetManager assetManager = new AssetManager(this);
     public SuperObject obj[] = new SuperObject[10];
+
+    public int ingotToCatch = 3;
+
+    /*
+    UI Manager
+     */
+    public UIManager uiManager = new UIManager(this);
 
     /*
     Sound Manager
@@ -156,6 +167,8 @@ public class GamePanel extends JPanel implements Runnable {
         // Player
         player.draw(g2);
 
+        //UI
+        uiManager.draw(g2);
 
         g2.dispose();
     }

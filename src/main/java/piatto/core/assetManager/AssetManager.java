@@ -4,6 +4,8 @@ import piatto.core.gamePanel.GamePanel;
 import piatto.object.objets.Chest;
 import piatto.object.objets.Ingot;
 
+import java.util.*;
+
 import static piatto.common.Random.random_int;
 
 public class AssetManager {
@@ -21,7 +23,9 @@ public class AssetManager {
         gamePanel.obj[1].worldX = 21 * gamePanel.tileSize;
         gamePanel.obj[1].worldY = 13 * gamePanel.tileSize;
 
-        for(int index = 2; index < 5; index ++){
+        int firstEmptyElementIndex = getLastElement(gamePanel.obj);
+
+        for(int index = firstEmptyElementIndex; index < (firstEmptyElementIndex + gamePanel.ingotToCatch); index ++){
             int x, y;
 
             boolean busySlot = true;
@@ -38,5 +42,12 @@ public class AssetManager {
             gamePanel.obj[index].worldX = x* gamePanel.tileSize;
             gamePanel.obj[index].worldY = y* gamePanel.tileSize;
         }
+    }
+    public int getLastElement(final Object[] array) {
+        int index;
+
+        for( index = 0; index < array.length && array[index] != null; index++){}
+
+        return index;
     }
 }

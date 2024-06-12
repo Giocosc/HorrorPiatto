@@ -14,6 +14,7 @@ public class SoundManager {
         soundURL[0] = getClass().getResource("/sounds/base-music.wav");
         soundURL[1] = getClass().getResource("/sounds/ingot-pick.wav");
         soundURL[2] = getClass().getResource("/sounds/step.wav");
+        soundURL[3] = getClass().getResource("/sounds/win.wav");
     }
 
     public void setFile(int i) {
