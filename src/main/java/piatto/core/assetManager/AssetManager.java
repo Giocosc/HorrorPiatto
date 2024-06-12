@@ -20,14 +20,23 @@ public class AssetManager {
         gamePanel.obj[1] = new Chest();
         gamePanel.obj[1].worldX = 21 * gamePanel.tileSize;
         gamePanel.obj[1].worldY = 13 * gamePanel.tileSize;
-        gamePanel.obj[2] = new Ingot();
-        gamePanel.obj[2].worldX = random_int(2, gamePanel.maxWorldCol) * gamePanel.tileSize;
-        gamePanel.obj[2].worldY = random_int(2, gamePanel.maxWorldRow) * gamePanel.tileSize;
-        gamePanel.obj[3] = new Ingot();
-        gamePanel.obj[3].worldX = random_int(2, gamePanel.maxWorldCol) * gamePanel.tileSize;
-        gamePanel.obj[3].worldY = random_int(2, gamePanel.maxWorldRow) * gamePanel.tileSize;
-        gamePanel.obj[4] = new Ingot();
-        gamePanel.obj[4].worldX = random_int(2, gamePanel.maxWorldCol) * gamePanel.tileSize;
-        gamePanel.obj[4].worldY = random_int(2, gamePanel.maxWorldRow) * gamePanel.tileSize;
+
+        for(int index = 2; index < 5; index ++){
+            int x, y;
+
+            boolean busySlot = true;
+            do{
+                x = random_int(2, gamePanel.maxWorldCol);
+                y = random_int(2, gamePanel.maxWorldRow);
+
+                int tile = gamePanel.tileManager.mapTile[y][x];
+
+                busySlot = (tile != 41);
+            }while (busySlot);
+
+            gamePanel.obj[index] = new Ingot();
+            gamePanel.obj[index].worldX = x* gamePanel.tileSize;
+            gamePanel.obj[index].worldY = y* gamePanel.tileSize;
+        }
     }
 }

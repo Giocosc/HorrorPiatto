@@ -115,7 +115,6 @@ public class Player extends EntityBase {
     public void update() {
 
         if (keyHandler.anyPressedKey()) {
-
             if (keyHandler.upPressed) {
                 direction = "up";
             }
@@ -158,12 +157,14 @@ public class Player extends EntityBase {
 
             spriteCounter++;
             if (spriteCounter > 10) {
+
                 if (spriteNumber == 3) {
                     spriteNumber = 2;
                 } else if (spriteNumber == 2) {
                     spriteNumber = 1;
                 } else {
                     spriteNumber = 3;
+                    gamePanel.playSoundEffect(2);
                 }
                 spriteCounter = 0;
             }
@@ -171,14 +172,15 @@ public class Player extends EntityBase {
 
     }
 
-    public void pickUpObject(int objIncex) {
-        String objectName =   gamePanel.obj[objIncex].name;
+    public void pickUpObject(int objIndex) {
+        String objectName = gamePanel.obj[objIndex].name;
         switch (objectName) {
             case "Chest":
-                ((Chest)(gamePanel.obj[objIncex])).toggleChest();
+                ((Chest) (gamePanel.obj[objIndex])).toggleChest();
                 break;
             case "Ingot":
-                gamePanel.obj[objIncex] =  null;
+                gamePanel.playSoundEffect(1);
+                gamePanel.obj[objIndex] = null;
                 hasIngot += 1;
                 break;
         }

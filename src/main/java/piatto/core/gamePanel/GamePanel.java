@@ -2,6 +2,7 @@ package piatto.core.gamePanel;
 
 import piatto.core.assetManager.AssetManager;
 import piatto.core.collisionManager.CollisionManager;
+import piatto.core.soundManager.SoundManager;
 import piatto.entities.player.Player;
 import piatto.core.keyHandler.KeyHandler;
 import piatto.object.SuperObject;
@@ -25,10 +26,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenRow = 12;
 
     // WORLD SETTINGS
-    public final int maxWorldCol =  50;
-    public final int maxWorldRow =  50;
-    public final int maxWorldWidth =  maxWorldCol * tileSize;
-    public final int maxWorldHeight =  maxWorldRow * tileSize;
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
 
     /*
     screen size  768x576
@@ -67,6 +66,12 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetManager assetManager = new AssetManager(this);
     public SuperObject obj[] = new SuperObject[10];
 
+    /*
+    Sound Manager
+     */
+    SoundManager soundManager = new SoundManager();
+    SoundManager music = new SoundManager();
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
@@ -80,8 +85,11 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
-    public void setupGame(){
+
+    public void setupGame() {
         assetManager.setObject();
+
+        playMusic(0);
     }
 
     /*
@@ -139,9 +147,9 @@ public class GamePanel extends JPanel implements Runnable {
         tileManager.draw(g2);
 
         // OBJECT
-        for (int index = 0; index < obj.length; index++){
-            if(obj[index] != null){
-                obj[index].draw(g2,this);
+        for (int index = 0; index < obj.length; index++) {
+            if (obj[index] != null) {
+                obj[index].draw(g2, this);
             }
         }
 
@@ -150,5 +158,24 @@ public class GamePanel extends JPanel implements Runnable {
 
 
         g2.dispose();
+    }
+
+    public void playMusic(int i) {
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+
+    public void stopMusic() {
+        music.stop();
+    }
+
+    public boolean isRunning() {
+        return soundManager.isRunning();
+    }
+
+    public void playSoundEffect(int i){
+        soundManager.setFile(i);
+        soundManager.play();
     }
 }
