@@ -25,7 +25,7 @@ public class AssetManager {
 
         int firstEmptyElementIndex = getLastElement(gamePanel.obj);
 
-        for(int index = firstEmptyElementIndex; index < (firstEmptyElementIndex + gamePanel.ingotToCatch); index ++){
+        for(int index = firstEmptyElementIndex; index < (firstEmptyElementIndex + gamePanel.ingotToSpawn); index ++){
             int x, y;
 
             boolean busySlot = true;

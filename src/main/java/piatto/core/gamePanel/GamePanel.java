@@ -68,9 +68,10 @@ public class GamePanel extends JPanel implements Runnable {
     Objects
      */
     public AssetManager assetManager = new AssetManager(this);
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject obj[] = new SuperObject[100];
 
     public int ingotToCatch = 3;
+    public int ingotToSpawn = ingotToCatch;
 
     /*
     UI Manager
@@ -97,7 +98,22 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
+    private void askDifficulty(){
+        String[] options = { "Easy", "Normal", "Hard" };
+        var selection = JOptionPane.showOptionDialog(null, "Select one:", "Let's play a game!",
+                0, 3, null, options, options[0]);
+        if (selection == 0) {
+            ingotToSpawn = ingotToSpawn + 50;
+
+        }
+        if (selection == 1) {
+            ingotToSpawn = ingotToSpawn + 10;
+        }
+    }
+
     public void setupGame() {
+
+        askDifficulty();
         assetManager.setObject();
 
         playMusic(0);
