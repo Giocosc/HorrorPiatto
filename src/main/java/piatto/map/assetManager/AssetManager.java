@@ -1,10 +1,8 @@
-package piatto.core.assetManager;
+package piatto.map.assetManager;
 
 import piatto.core.gamePanel.GamePanel;
-import piatto.object.objets.Chest;
-import piatto.object.objets.Ingot;
-
-import java.util.*;
+import piatto.map.object.objets.Chest;
+import piatto.map.object.objets.Ingot;
 
 import static piatto.common.Random.random_int;
 

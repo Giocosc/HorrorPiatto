@@ -1,9 +1,8 @@
 package piatto.core.UIManager;
 
 import piatto.core.gamePanel.GamePanel;
-import piatto.object.objets.Ingot;
+import piatto.map.object.objets.Ingot;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;

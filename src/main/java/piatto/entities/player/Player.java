@@ -3,7 +3,7 @@ package piatto.entities.player;
 import piatto.entities.EntityBase;
 import piatto.core.gamePanel.GamePanel;
 import piatto.core.keyHandler.KeyHandler;
-import piatto.object.objets.Chest;
+import piatto.map.object.objets.Chest;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

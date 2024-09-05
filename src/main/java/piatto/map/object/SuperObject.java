@@ -1,4 +1,4 @@
-package piatto.object;
+package piatto.map.object;
 
 import piatto.core.gamePanel.GamePanel;
 

@@ -1,6 +1,6 @@
-package piatto.object.objets;
+package piatto.map.object.objets;
 
-import piatto.object.SuperObject;
+import piatto.map.object.SuperObject;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;

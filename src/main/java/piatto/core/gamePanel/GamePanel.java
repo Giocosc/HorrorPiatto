@@ -1,13 +1,13 @@
 package piatto.core.gamePanel;
 
-import piatto.core.assetManager.AssetManager;
-import piatto.core.collisionManager.CollisionManager;
+import piatto.map.assetManager.AssetManager;
+import piatto.map.collisionManager.CollisionManager;
 import piatto.core.soundManager.SoundManager;
 import piatto.core.UIManager.UIManager;
 import piatto.entities.player.Player;
 import piatto.core.keyHandler.KeyHandler;
-import piatto.object.SuperObject;
-import piatto.tile.tileManager.TileManager;
+import piatto.map.object.SuperObject;
+import piatto.map.MapManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
     /*
     Tile Manager
      */
-    public TileManager tileManager = new TileManager(this);
+    public MapManager tileManager = new MapManager(this);
 
     /*
     Collision Manager

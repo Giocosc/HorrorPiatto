@@ -1,26 +1,26 @@
-package piatto.object.objets;
+package piatto.map.object.objets;
 
-import piatto.object.SuperObject;
+import piatto.map.object.SuperObject;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class Door extends SuperObject {
+
+public class Chest extends SuperObject {
 
     public boolean isOpen = false;
 
-    public Door(){
-        name = "Door";
+    public Chest(){
+        name = "Chest";
 
         setImage();
 
         collision = true;
     }
 
-    public void toggleDoor(){
+    public void toggleChest(){
         if(!isOpen){
-            isOpen = true;
-            collision = false;
+            isOpen = !isOpen;
 
             setImage();
         }

@@ -1,4 +1,4 @@
-package piatto.core.collisionManager;
+package piatto.map.collisionManager;
 
 import piatto.core.gamePanel.GamePanel;
 import piatto.entities.EntityBase;
@@ -50,8 +50,8 @@ public class CollisionManager {
         }
 
         if (tileNum1 != -1 && tileNum2 != -1) {
-            boolean tileNum1Collision = gamePanel.tileManager.GetTail(tileNum1).collision;
-            boolean tileNum2Collision = gamePanel.tileManager.GetTail(tileNum2).collision;
+            boolean tileNum1Collision = gamePanel.tileManager.tileManager.getTileById(tileNum1).Collision;
+            boolean tileNum2Collision = gamePanel.tileManager.tileManager.getTileById(tileNum2).Collision;
             if (tileNum1Collision || tileNum2Collision) {
                 entity.collisionOn = true;
             }
